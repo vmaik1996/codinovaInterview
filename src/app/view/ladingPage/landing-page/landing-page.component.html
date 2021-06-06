@@ -1,0 +1,84 @@
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="cart-div">
+            <table class="border">
+              <thead>
+                <tr>
+                  <th width="10%"></th>
+                  <th width="35%">PRODUCTS</th>
+                  <th width="15%">PRICE</th>
+                  <th width="30%">QUANTITY</th>
+                  <th>TOTAL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of cartData; let i = index">
+                  <td  class="remove" (click)="deleteCartValue(data, i)"></td>
+                  <td>{{data.name}}</td>
+                  <td>{{data.price}}</td>
+                  <td>
+                    <div class="spin">
+                        <div class="value-button" id="decrease" (click)="decreaseCart(data, i)" >-</div>
+                        <p id="number">{{data?.quantity}}</p>
+                        <div class="value-button" id="increase" (click)="increaseCart(data, i)">+</div>
+                      </div>
+                  </td>
+                  <td>{{data.total}}</td>
+                </tr>
+                <tr *ngIf="cartData.length == 0" class="noData">
+                  <td colspan="5">
+                    THERE ARE NO PRODUCTS
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <table class="result">
+              <tr>
+                <th width="35%">Sub Total</th>
+                <td><span>{{subTotal | number: '1.2-4'}} EUR</span><span class="right"><b>{{totalQuantity}} items</b></span></td>
+              </tr>
+              <tr width="35%">
+                <th>VAT Tax</th>
+                <td><span class="percentage">{{percentageAmount}}%</span><span class="right"><b>{{tax | number: '1.2-4'}} EUR</b></span></td>
+              </tr>
+              <tr width="35%">
+                <th>Discount</th>
+                <td><span class="percentage">{{percentageAmount}}%</span><span class="right"><b>{{discount | number: '1.2-4'}} EUR</b></span></td>
+              </tr>
+              <tr width="35%">
+                <th>Total</th>
+                <td><span class="total"><b>{{total | number: '1.2-4'}} EUR</b></span></td>
+              </tr>           
+            </table>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-cancle" (click)="emptyCart()">Cancle Sale</button>
+            <button class="btn btn-process" (click)="process()" [disabled]="totalQuantity == 0">Process Sale</button>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-2" *ngFor="let data of itemData">
+              <div class="hvrbox imageDetail" (click)="addToCart(data)">
+                    <img src='assets/images/{{data.image}}'  />
+                    <div class="hvrbox-layer_top">
+                        <div class="hvrbox-text">
+                            <div class="heading">{{data.name}}</div>
+                            <div>
+                                <b>{{data?.price}}</b><br/>
+                                <small>{{data?.description}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>     
+      </div>
+    </div>
+  </section>
+  <app-modal *ngIf="openModal"></app-modal>

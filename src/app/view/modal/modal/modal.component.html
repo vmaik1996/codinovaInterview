@@ -1,0 +1,50 @@
+<div id="myModal" class="modal" *ngIf="view">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" (click)="close()">&times;</span>
+        <h2>Modal Header</h2>
+      </div>
+      <div class="modal-body">
+        <h3 style="text-align:center">Sale No.:00102</h3>
+        <p>{{date | date:'dd-MM-yyyy, h:mm:ss'}}</p>
+        <div>
+            <table class="result">
+                <tr>
+                    <th>#</th>
+                    <th>Products</th>
+                    <th>Quantity</th>
+                    <th>Sub Total</th>
+                </tr>
+                <tr *ngFor="let data of data.addedProduct; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{data.name}}</td>
+                    <td>{{data?.quantity}}</td>
+                    <td>{{data.total}}</td>
+                </tr>
+              </table>
+              <table class="result">
+                <tr>
+                    <td><span>Total Items</span><span class="right"><b>{{data.totalQuantity}}</b></span></td>
+                    <td><span>Total</span><span class="right"><b>{{data.total}} INR</b></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span>Discount</span><span class="right"><b>{{data.percentageAmount}}%</b></span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span>VAT</span><span class="right"><b>{{data.percentageAmount}}%</b></span></td>
+                </tr>
+              </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div>
+            <button class="btn button-transparent" (click)="close()" >Close</button>
+        </div>
+      </div>
+    </div>
+  
+  </div>
